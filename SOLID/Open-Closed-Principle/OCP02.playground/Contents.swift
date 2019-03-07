@@ -5,9 +5,16 @@
 //Open for extension: You should be able to extend or change the behaviours of a class without efforts.
 //Closed for modification: You must extend a class without changing the implementation.
 
+//We can solve this problem creating a new protocol Printable, which will be implemented by the classes to log. Finally, printData will print an array of Printable.
+//In this way, we create a new abstract layer between printData and the class to log, allowing the print of other classes like Bicycle and without changing the printData implementation.
+
 import Foundation
 
-class Car {
+protocol Printable {
+    func printDetails() -> String
+}
+
+class Car: Printable {
     let name: String
     let color: String
     
@@ -21,7 +28,7 @@ class Car {
     }
 }
 
-class Bicycle {
+class Bicycle: Printable {
     let type: String
     
     init(type: String) {
@@ -36,23 +43,16 @@ class Bicycle {
 class Logger {
     
     func printData() {
-        let cars = [
+        let cars: [Printable] = [
             Car(name: "Batmobile", color: "Black"),
             Car(name: "SuperCar", color: "Gold"),
-            Car(name: "FamilyCar", color: "Grey")
-        ]
-        
-        cars.forEach { car in
-            print(car.printDetails())
-        }
-        
-        let bicycles = [
+            Car(name: "FamilyCar", color: "Grey"),
             Bicycle(type: "BMX"),
             Bicycle(type: "Tandem")
         ]
         
-        bicycles.forEach { bicycles in
-            print(bicycles.printDetails())
+        cars.forEach { car in
+            print(car.printDetails())
         }
     }
 }
