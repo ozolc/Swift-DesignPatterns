@@ -27,6 +27,7 @@ class Pengiun: Bird {
 let eagle = Eagle(name: "Eagle", flySpeed: 25)
 //let penguin = Pengiun(name: "Penguin", flySpeed: "can't fly", swimSpeed: 10)
 
+// Right realization
 protocol CanFly {
     var flySpeed: Double { get set }
 }
